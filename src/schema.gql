@@ -1,0 +1,491 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AnthropometricMeasurement {
+  _id: ID!
+  armCircumference: Float!
+  bodyMassIndex: Float!
+  createdAt: DateTime!
+  date: DateTime!
+  deletedAt: DateTime
+  height: Float!
+  hipCircumference: Float!
+  legCircumference: Float!
+  updatedAt: DateTime!
+  userId: ID!
+  waistCircumference: Float!
+  weight: Float!
+}
+
+type Board {
+  _id: ID!
+  backgroundColor: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String
+  members: [ID!]
+  title: String!
+  updatedAt: DateTime!
+  userId: ID
+}
+
+input BoardInput {
+  backgroundColor: String!
+  description: String
+  members: [ID!]
+  title: String!
+  userId: UserSharedInput
+}
+
+type Card {
+  _id: ID!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String!
+  position: Int!
+  routines: [Routine!]
+  tasks: [Task!]
+  title: String!
+  updatedAt: DateTime!
+  userid: ID!
+}
+
+input CardInput {
+  description: String!
+  position: Int!
+  routines: [RoutineInput!]
+  tasks: [TaskInput!]
+  title: String!
+  userid: ID!
+}
+
+input CreateAnthropometricInput {
+  armCircumference: Float!
+  bodyMassIndex: Float!
+  height: Float!
+  hipCircumference: Float!
+  legCircumference: Float!
+  waistCircumference: Float!
+  weight: Float!
+}
+
+input CreateBoardInput {
+  backgroundColor: String!
+  description: String
+  members: [ID!]
+  title: String!
+}
+
+input CreateCardInput {
+  description: String
+  listId: ID!
+  position: Int!
+  routines: ID
+  tasks: ID
+  title: String!
+}
+
+input CreateListInput {
+  boardId: BoardInput!
+  cards: [CardInput!]
+  position: Float!
+  title: String!
+}
+
+input CreatePhysicalTestInput {
+  benchPress: TestResultsInput!
+  horizontalJump: Float!
+  militaryPress: TestResultsInput!
+  pullUps: Float!
+  runningDistance: RunningDistanceInput!
+  sprint: SprintInput
+  squat: TestResultsInput!
+  testDate: DateTime!
+  verticalJump: Float!
+}
+
+input CreateProfileInput {
+  associated_gym: GymInput
+  boardId: [BoardInput!]
+  cel_phone: String
+  date_of_birth: String
+  full_name: String!
+  gender: String
+  health_history: String
+  levelexp: String
+  profile_picture: String
+  routines: [RoutineInput!]
+}
+
+input CreateRoutineInput {
+  description: String!
+  exercises: [ExercisesInput!]
+  name: String!
+}
+
+input CreateTaskInput {
+  description: String!
+  status: String! = "pending"
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ExerciseDTO {
+  loadPercent: Int!
+  name: String!
+  repetitions: Int!
+  restBetweenSets: Int!
+  sets: Int!
+}
+
+input ExercisesInput {
+  loadPercent: String!
+  name: String!
+
+  """numero de repeticiones"""
+  repetitions: Int!
+  restBetweenSets: String!
+
+  """numero de sets del ejercicio"""
+  sets: Int!
+}
+
+input FindUserInput {
+  username: String!
+}
+
+type GymDTO {
+  location: String!
+  name: String!
+}
+
+input GymInput {
+  location: String!
+  name: String!
+}
+
+type List {
+  _id: ID!
+  boardId: Board!
+  cards: [Card!]
+  createdAt: DateTime!
+  deletedAt: DateTime
+  position: Float!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String
+  user: User!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  blockProfile(id: ID!): Profile!
+  blockUser(id: ID!): User!
+  createAnthropometricMeasurement(createAnthropometricMeasurementInput: CreateAnthropometricInput!): AnthropometricMeasurement!
+  createBoard(createBoardInput: CreateBoardInput!): Board!
+  createCard(createCardInput: CreateCardInput!, listId: ID!): Card!
+  createList(createListInput: CreateListInput!): List!
+  createPhysicalTest(createPhysicalTestInput: CreatePhysicalTestInput!): PhysicalTest!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  createRoutine(createRoutineInput: CreateRoutineInput!): Routine!
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  login(loginInput: LoginInput!): LoginResponse!
+  removeAnthropometricMeasurement(id: ID!): AnthropometricMeasurement!
+  removeBoard(removeBoardInput: RemoveBoardInput!): Board!
+  removeCard(id: Int!): Card!
+  removeList(removeListInput: RemoveListInput!): List!
+  removePhysicalTest(id: ID!): PhysicalTest!
+  removeRoutine(id: ID!): Routine!
+  removeTask(id: ID!): Task!
+  signup(loginUserInput: LoginUserInput!): SingupResponse!
+  updateAnthropometricMeasurement(updateAnthropometricMeasurementInput: UpdateAnthropometricInput!): AnthropometricMeasurement!
+  updateBoard(updateBoardInput: UpdateBoardInput!): Board!
+  updateCard(updateCardInput: UpdateCardInput!): Card!
+  updateList(updateListInput: UpdateListInput!): List!
+  updateListPosition(updateListPositionInput: UpdateListPositionInput!): List!
+  updatePhysicalTest(updatePhysicalTestInput: UpdatePhysicalTestInput!): PhysicalTest!
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
+  updateRoutine(updateRoutineInput: UpdateRoutineInput!): Routine!
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type PhysicalTest {
+  _id: ID!
+  benchPress: TestResultsDTO!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  horizontalJump: Float!
+  militaryPress: TestResultsDTO!
+  pullUps: Float!
+  runningDistance: RunningDistanceDTO!
+  sprint: RunningDistanceDTO!
+  squat: TestResultsDTO!
+  testDate: DateTime!
+  updatedAt: DateTime!
+  userId: UserPopulate
+  verticalJump: Float!
+}
+
+type Profile {
+  _id: ID!
+  associated_gym: GymDTO
+  boardId: [Board!]
+  cel_phone: String
+  createdAt: DateTime!
+  date_of_birth: String
+  deletedAt: DateTime
+  full_name: String
+  gender: String
+  health_history: String
+  levelexp: String
+  profile_picture: String
+  routines: [Routine!]
+  updatedAt: DateTime!
+  userId: UserPopulate
+}
+
+type Query {
+  anthropometricMeasurements(roles: [ValidRoles!] = []): [AnthropometricMeasurement!]!
+  board(id: ID!): Board!
+  boards: [Board!]!
+  card(id: Int!): Card!
+  cards(roles: [ValidRoles!] = []): [Card!]!
+  findByRoutine(id: ID!): Routine!
+  findByTask(id: ID!): Task!
+  findOneAnthropometric(id: ID!): AnthropometricMeasurement!
+  findOneByBoard(boardId: ID!): [List!]!
+  findOneByIdAnthropometric(id: ID!): AnthropometricMeasurement!
+  findOneByIdBoard(id: ID!): Board!
+  findOneByIdList(id: ID!): List!
+  findOneByIdPhysicalTest(id: ID!): PhysicalTest!
+  findOneByUserAnthropometric: AnthropometricMeasurement!
+  findOneByUserBoard: Board!
+  findOneByUserPhysicalTest: PhysicalTest!
+  findOnePhysicalTest(id: ID!): PhysicalTest!
+  findOneRoutine(id: ID!): Routine!
+  isValidate(email: String!): LoginResponse!
+  list(id: ID!): List!
+  lists: [List!]!
+  physicalTests(roles: [ValidRoles!] = []): [PhysicalTest!]!
+  profile: Profile!
+  profiles(roles: [ValidRoles!] = []): [Profile!]!
+  revalidate: LoginResponse!
+  routines: [Routine!]!
+  task(id: ID!): Task!
+  tasks: [Task!]!
+  user(findUserInput: FindUserInput!): User!
+  users(roles: [ValidRoles!] = []): [User!]!
+}
+
+input RemoveBoardInput {
+  _id: ID!
+}
+
+input RemoveListInput {
+  _id: ID!
+}
+
+type Routine {
+  _id: ID!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String!
+  exercises: [ExerciseDTO!]!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input RoutineInput {
+  description: String!
+  exercises: [ExercisesInput!]
+  name: String!
+}
+
+type RunningDistanceDTO {
+  distance: Float!
+  time: String!
+}
+
+input RunningDistanceInput {
+  distance: Float!
+  time: String!
+}
+
+type SingupResponse {
+  accessToken: String!
+  refreshToken: String
+  user: User!
+}
+
+input SprintInput {
+  distance: Float!
+  time: String!
+}
+
+type Task {
+  _id: ID!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  description: String!
+  status: String
+  title: String!
+  updatedAt: DateTime!
+}
+
+input TaskInput {
+  description: String!
+  status: String
+  title: String!
+}
+
+type TestResultsDTO {
+  repetitions: Float!
+  weight: Float!
+}
+
+input TestResultsInput {
+  repetitions: Int!
+  weight: Float!
+}
+
+input UpdateAnthropometricInput {
+  _id: ID!
+  armCircumference: Float
+  bodyMassIndex: Float
+  height: Float
+  hipCircumference: Float
+  legCircumference: Float
+  waistCircumference: Float
+  weight: Float
+}
+
+input UpdateBoardInput {
+  _id: ID!
+  backgroundColor: String
+  description: String
+  members: [ID!]
+  title: String
+}
+
+input UpdateCardInput {
+  _id: ID!
+  description: String
+  listId: ID
+  position: Int
+  routines: ID
+  tasks: ID
+  title: String
+}
+
+input UpdateListInput {
+  _id: ID!
+  boardId: BoardInput
+  cards: [CardInput!]
+  position: Float
+  title: String
+}
+
+input UpdateListPositionInput {
+  listId: ID!
+  position: Float!
+}
+
+input UpdatePhysicalTestInput {
+  _id: String!
+  benchPress: TestResultsInput!
+  horizontalJump: Float!
+  militaryPress: TestResultsInput!
+  pullUps: Float!
+  runningDistance: RunningDistanceInput!
+  sprint: SprintInput
+  squat: TestResultsInput!
+  testDate: DateTime!
+  verticalJump: Float!
+}
+
+input UpdateProfileInput {
+  _id: ID!
+  associated_gym: GymInput
+  boardId: [BoardInput!]
+  cel_phone: String
+  date_of_birth: String
+  full_name: String
+  gender: String
+  health_history: String
+  levelexp: String
+  profile_picture: String
+  routines: [RoutineInput!]
+}
+
+input UpdateRoutineInput {
+  _id: ID!
+  description: String
+  exercises: [ExercisesInput!]
+  name: String
+}
+
+input UpdateTaskInput {
+  _id: ID!
+  description: String
+  status: String
+  title: String
+}
+
+input UpdateUserInput {
+  _id: ID!
+  email: String
+  isActive: Boolean
+  password: String
+  roles: [ValidRoles!]
+  username: String
+}
+
+type User {
+  _id: ID!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  email: String!
+  isActive: Boolean!
+  lastUpdatedById: UserPopulate
+  password: String!
+  role: [String!]!
+  updatedAt: DateTime!
+  username: String!
+}
+
+type UserPopulate {
+  email: String!
+  role: [String!]!
+  username: String!
+}
+
+input UserSharedInput {
+  username: String!
+}
+
+enum ValidRoles {
+  admin
+  guest
+  superadmin
+  user
+}
